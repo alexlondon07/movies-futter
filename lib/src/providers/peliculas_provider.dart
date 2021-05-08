@@ -9,9 +9,9 @@ class PeliculasProvider {
 
   // Peliculas en cine
   Future<List<Pelicula>> getNowPlaying() async{
-    final url = Uri.http(_url, '3/movie/now_playing', {
+    final url = Uri.https(_url, '3/movie/now_playing', {
       'api_key' : _apikey,
-      'languahe' : _language
+      'language' : _language
     });
     final res = await http.get( url );
     final decodedData = json.decode(res.body);
