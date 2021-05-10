@@ -16,10 +16,12 @@ class HomePage extends StatelessWidget {
             IconButton(icon: Icon(Icons.search), onPressed: () {})
         ],
       ),
-      body: SafeArea(
+      body: Container(
         child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround, // Para que tenga espacio entre los elementos
           children: <Widget>[
-            _swiperTarjetas()
+            _swiperTarjetas(),
+            _footer(context)
           ],
         )
       )
@@ -42,6 +44,28 @@ class HomePage extends StatelessWidget {
     );
   }
 
-
+  //  Listado de las peliculas populares
+  Widget _footer(BuildContext context){
+    return Container(
+      width: double.infinity,
+      child: Column(
+        children: <Widget>[
+          Text('Populares', style: Theme.of(context).textTheme.subtitle1),
+            FutureBuilder(
+              future: moviesProvider.getPopulars(),
+              builder: (BuildContext context, AsyncSnapshot<List> snapshot){
+                if(snapshot.hasData){
+                return  CardSwiper(peliculas: snapshot.data);
+                }else{
+                return Container(
+                    child: Center(child: CircularProgressIndicator())
+                );
+              }
+            },
+          )
+        ]
+      )
+    );
+  }
 
 }
