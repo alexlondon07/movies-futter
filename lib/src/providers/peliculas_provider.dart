@@ -11,7 +11,7 @@ class PeliculasProvider {
 
   int _popularPage   = 0;
 
-  List<Pelicula> _populars = new List();
+  List<Pelicula> _populars = [];
 
   final _popularsStreamController = StreamController<List<Pelicula>>.broadcast();
 
@@ -33,7 +33,7 @@ class PeliculasProvider {
     final resp = await  _sendRequestGeneric('3/movie/popular');
 
     _populars.addAll(resp);
-    popularsSink ( _populars );
+    popularsSink ( _populars ); // Agregando aca más peliculas
 
     return resp;
   }
