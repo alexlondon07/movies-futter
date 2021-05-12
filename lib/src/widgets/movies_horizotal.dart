@@ -26,10 +26,12 @@ class MovieHorizontal extends StatelessWidget {
 
     return Container(
       height: _screenSize.height * 0.3,
-      child: PageView(
+      child: PageView.builder(
         pageSnapping: false,
         controller: _pageController,
-        children: _cards(context),
+        //children: _cards(context),
+        itemCount: movies.length,
+        itemBuilder: ( context, i) => _card( context, movies[i] ),
       )
     );
   }
@@ -57,6 +59,29 @@ class MovieHorizontal extends StatelessWidget {
         ),
       );
     }).toList();
+  }
+
+  Widget _card(BuildContext context, Pelicula movie){
+    return Container(
+        margin: EdgeInsets.only(right: 15.0),
+          child: Column(
+            children: <Widget>[
+              ClipRRect(
+                  borderRadius: BorderRadius.circular(20.0),
+                  child: FadeInImage(
+                  image: NetworkImage( movie.getPosterImg() ),
+                  placeholder: AssetImage('assets/img/no-image.jpg'),
+                  height: 160.0,
+                ),
+              ),
+              Text(
+                movie.title,
+                overflow: TextOverflow.ellipsis, // Pone 3 ... cuando no cabe el texto,
+                style: Theme.of(context).textTheme.caption
+              )
+            ],
+        ),
+      );
   }
 
 
