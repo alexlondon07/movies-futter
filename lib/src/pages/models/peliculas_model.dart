@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+
 class Peliculas {
   List<Pelicula> items = [];
 
@@ -66,14 +68,14 @@ class Pelicula {
 
   getPosterImg(){
     if(posterPath == null){
-      return "https://safetyaustraliagroup.com.au/wp-content/uploads/2019/05/image-not-found.png";
+      return AssetImage('assets/img/image-not-found.png');
     } else {
       return "https://image.tmdb.org/t/p/w500/$posterPath";
     }
   }
   getBackgroundImgImg(){
     if(backdropPath == null){
-      return "https://safetyaustraliagroup.com.au/wp-content/uploads/2019/05/image-not-found.png";
+      return AssetImage('assets/img/image-not-found.png');
     } else {
       return "https://image.tmdb.org/t/p/w500/$backdropPath";
     }
