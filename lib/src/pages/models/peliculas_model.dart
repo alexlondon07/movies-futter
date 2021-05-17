@@ -1,5 +1,5 @@
 class Peliculas {
-  List<Pelicula> items = new List();
+  List<Pelicula> items = [];
 
   Peliculas();
 
@@ -71,4 +71,12 @@ class Pelicula {
       return "https://image.tmdb.org/t/p/w500/$posterPath";
     }
   }
+  getBackgroundImgImg(){
+    if(backdropPath == null){
+      return "https://safetyaustraliagroup.com.au/wp-content/uploads/2019/05/image-not-found.png";
+    } else {
+      return "https://image.tmdb.org/t/p/w500/$backdropPath";
+    }
+  }
+
 }
