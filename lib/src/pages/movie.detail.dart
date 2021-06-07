@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:movies/src/pages/models/actor_model.dart';
 import 'package:movies/src/pages/models/peliculas_model.dart';
+import 'package:movies/src/providers/peliculas_provider.dart';
 
 class MovieDetail extends StatelessWidget {
   @override
@@ -16,6 +18,7 @@ class MovieDetail extends StatelessWidget {
               SizedBox( height: 10.0),
               _posterTitle(movie, context),
               _description( movie ),
+              _createCasting( movie ),
             ]
           ))
         ],
@@ -88,4 +91,54 @@ class MovieDetail extends StatelessWidget {
     );
   }
 
+  Widget _createCasting( Pelicula movie){
+    final movieProvider = new PeliculasProvider();
+
+    return FutureBuilder(
+      future: movieProvider.getCast(movie.id.toString()),
+      builder: (context, AsyncSnapshot<List> snapshot) {
+        if( snapshot.hasData ){
+          return _createActorsPageView( snapshot.data );
+        }else{
+          return Center(child: CircularProgressIndicator());
+        }
+      },
+    );
+  }
+
+  Widget _createActorsPageView ( List<Actor> actors){
+    return SizedBox(
+      height: 200.0,
+      child: PageView.builder(
+        controller: PageController(
+          viewportFraction: 0.3,
+          initialPage: 1
+        ),
+        itemCount: actors.length,
+        itemBuilder: (context, i) => _actorCard(actors[i])
+      ),
+    );
+  }
+
+  Widget _actorCard ( Actor actor){
+    return Container(
+      child: Column(
+        children: <Widget>[
+          ClipRRect(
+              borderRadius: BorderRadius.circular(20.0),
+              child: FadeInImage(
+              image: NetworkImage( actor.getImg() ),
+              placeholder: AssetImage('assets/img/no-image.jpg'),
+              height: 150.0,
+              fit: BoxFit.cover,
+            ),
+          ),
+          Text(
+            actor.name,
+            overflow: TextOverflow.ellipsis,
+          )
+        ]
+      )
+    );
+  }
 }

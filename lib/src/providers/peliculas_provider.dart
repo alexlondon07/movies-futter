@@ -50,7 +50,7 @@ class PeliculasProvider {
     });
     final res = await http.get( url );
     final decodedData = json.decode(res.body);
-    final cast = new Cast.fromJsonList( decodedData['cast']);
+    final cast = new Cast.fromJsonList( decodedData['cast'] );
     return cast.actors;
 
   }
