@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 
 class Cast {
 
-  List<Actor> items = [];
+  List<Actor> actors = [];
 
   Cast.fromJsonList( List<dynamic> jsonList){
 
@@ -11,7 +11,7 @@ class Cast {
 
     for (var item in jsonList) {
       final actor = new Actor.fromJsonMap(item);
-      items.add(actor);
+      actors.add(actor);
     }
   }
 }

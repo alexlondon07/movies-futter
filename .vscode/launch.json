@@ -6,7 +6,8 @@
     "configurations": [
         {
             "name": "movies",
-            "request": "launch", 
+            "program": "lib/main.dart",
+            "request": "launch",
             "type": "dart"
         }
     ]
